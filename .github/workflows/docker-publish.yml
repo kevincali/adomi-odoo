@@ -16,9 +16,9 @@ on:
         required: false
         default: ''
       target_platforms:
-        description: 'Target platforms for buildx (e.g., linux/amd64,linux/arm64)'
+        description: 'Target platforms for buildx (e.g., linux/arm64)'
         required: false
-        default: 'linux/amd64,linux/arm64'
+        default: 'linux/arm64'
       skip_unit_tests:
         description: 'Skip unit tests when building this image'
         type: boolean
@@ -43,7 +43,7 @@ env:
   ODOO_VERSION: 19.0
   ODOO_REPOSITORY: https://github.com/odoo/odoo.git
   SKIP_UNIT_TESTS: false
-  TARGET_PLATFORMS: linux/amd64,linux/arm64
+  TARGET_PLATFORMS: linux/arm64
 
 jobs:
   build-and-push:
@@ -59,7 +59,7 @@ jobs:
       ODOO_VERSION: ${{ inputs.odoo_version || '19.0' }}
       ODOO_REPOSITORY: ${{ inputs.odoo_repository || 'https://github.com/odoo/odoo.git' }}
       IMAGE_TAG: ${{ inputs.image_tag || '' }}
-      TARGET_PLATFORMS: ${{ inputs.target_platforms || 'linux/amd64,linux/arm64' }}
+      TARGET_PLATFORMS: ${{ inputs.target_platforms || 'linux/arm64' }}
       SKIP_UNIT_TESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.skip_unit_tests || true }}
 
     steps:
